@@ -48,3 +48,6 @@ supabase/.temp/
 
 # Test coverage
 coverage/
+
+# Kiro AI specs — local tooling only, not part of the codebase
+.kiro/
