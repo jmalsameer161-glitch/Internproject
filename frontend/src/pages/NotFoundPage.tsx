@@ -6,7 +6,7 @@ export function NotFoundPage() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 text-center">
       <h1 className="text-4xl font-bold text-foreground">404</h1>
-      <p className="text-muted-foreground">Page not found.</p>
+      <p className="text-muted-foreground">page not found.</p>
       <Link to="/">
         <Button variant="outline">
           <ArrowLeft className="mr-2 h-4 w-4" />
