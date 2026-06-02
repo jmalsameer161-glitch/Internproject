@@ -109,30 +109,34 @@ export function Sidebar() {
         {navContent}
       </aside>
 
-      {/* Mobile hamburger */}
-      <div className="md:hidden">
+      {/* Mobile top bar */}
+      <div className="md:hidden fixed top-0 left-0 right-0 z-40 h-14 flex items-center border-b bg-card px-4 shadow-sm">
         <Button
           variant="ghost"
           size="icon"
-          className="fixed left-4 top-4 z-50"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </Button>
-
-        {mobileOpen && (
-          <>
-            <div
-              className="fixed inset-0 z-40 bg-black/50"
-              onClick={() => setMobileOpen(false)}
-            />
-            <aside className="fixed left-0 top-0 z-50 h-full w-64 border-r bg-card shadow-lg">
-              {navContent}
-            </aside>
-          </>
-        )}
+        <div className="flex items-center gap-2 ml-2">
+          <Building2 className="h-5 w-5 text-primary" />
+          <span className="text-base font-semibold text-foreground">Admin Dashboard</span>
+        </div>
       </div>
+
+      {/* Mobile drawer overlay */}
+      {mobileOpen && (
+        <div className="md:hidden">
+          <div
+            className="fixed inset-0 z-40 bg-black/50"
+            onClick={() => setMobileOpen(false)}
+          />
+          <aside className="fixed left-0 top-0 z-50 h-full w-64 border-r bg-card shadow-lg">
+            {navContent}
+          </aside>
+        </div>
+      )}
     </>
   )
 }
