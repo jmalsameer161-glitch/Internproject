@@ -19,9 +19,9 @@ export function useUpdateOrganization() {
         .update({ name, type, school_district: school_district ?? null })
         .eq('id', id)
         .select()
-        .single()
       if (error) throw new Error(error.message)
-      return data as Organization
+      if (!data || data.length === 0) throw new Error('Update failed: organization not found')
+      return data[0] as Organization
     },
     onSuccess: (updated) => {
       // Invalidate both the list and the single org query
