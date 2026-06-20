@@ -23,9 +23,12 @@ export function DashboardPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between animate-in fade-in-50 slide-in-from-top-2 duration-500">
         <h1 className="text-2xl font-bold text-foreground">Organizations</h1>
-        <Button onClick={() => navigate('/organizations/new')}>
+        <Button 
+          onClick={() => navigate('/organizations/new')}
+          className="transition-all duration-200 hover:scale-105 active:scale-95"
+        >
           <Plus className="mr-2 h-4 w-4" />
           Create Organization
         </Button>
