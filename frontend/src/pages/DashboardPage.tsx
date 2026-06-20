@@ -31,15 +31,20 @@ export function DashboardPage() {
         </Button>
       </div>
 
-      {/* Search */}
+      {/* Search with proper labels */}
       <div className="relative max-w-sm">
-        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <label htmlFor="org-search" className="sr-only">
+          Search organizations by name
+        </label>
+        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground pointer-events-none" aria-hidden="true" />
         <Input
+          id="org-search"
           placeholder="Search organizations..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           maxLength={100}
           className="pl-9"
+          aria-label="Search organizations"
         />
       </div>
 
@@ -52,12 +57,22 @@ export function DashboardPage() {
         </div>
       )}
 
-      {/* Error */}
+      {/* Error with retry action */}
       {isError && (
-        <div className="flex items-center gap-3 rounded-md border border-destructive/50 bg-destructive/10 p-4 text-destructive">
-          <AlertCircle className="h-5 w-5 shrink-0" />
+        <div 
+          className="flex items-center gap-3 rounded-md border border-destructive/50 bg-destructive/10 p-4 text-destructive"
+          role="alert"
+          aria-live="polite"
+        >
+          <AlertCircle className="h-5 w-5 shrink-0" aria-hidden="true" />
           <span className="text-sm">Failed to load organizations.</span>
-          <Button variant="outline" size="sm" onClick={() => void refetch()} className="ml-auto">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={() => void refetch()} 
+            className="ml-auto"
+            aria-label="Retry loading organizations"
+          >
             Retry
           </Button>
         </div>
