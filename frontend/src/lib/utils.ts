@@ -10,7 +10,7 @@ export function formatDate(iso: string): string {
 }
 
 export function getEdgeFunctionUrl(name: string): string {
-  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string
+  const supabaseUrl = (import.meta.env.VITE_SUPABASE_URL as string).trim()
   return `${supabaseUrl}/functions/v1/${name}`
 }
 
