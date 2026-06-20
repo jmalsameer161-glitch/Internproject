@@ -65,20 +65,24 @@ export function Sidebar() {
 
       {/* Bottom section */}
       <div className="px-3 py-4 space-y-2">
-        {/* Theme toggle */}
+        {/* Theme toggle with enhanced animations */}
         <Button
           variant="ghost"
           size="sm"
-          className="w-full justify-start gap-2"
+          className="w-full justify-start gap-2 hover:bg-accent transition-all duration-200"
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           aria-label="Toggle theme"
         >
-          {theme === 'dark' ? (
-            <Sun className="h-4 w-4" />
-          ) : (
-            <Moon className="h-4 w-4" />
-          )}
-          {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+          <div className="relative h-4 w-4">
+            {theme === 'dark' ? (
+              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all duration-300" />
+            ) : (
+              <Moon className="h-4 w-4 rotate-0 scale-100 transition-all duration-300" />
+            )}
+          </div>
+          <span className="transition-all duration-200">
+            {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+          </span>
         </Button>
 
         {/* User info */}
