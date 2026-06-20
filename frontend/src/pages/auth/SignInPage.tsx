@@ -30,13 +30,24 @@ export function SignInPage() {
     setFormError(null)
     setIsLoading(true)
     try {
+      // Log for debugging
+      console.log('Attempting sign in with:', { email: data.email })
+      
       const { error } = await supabase.auth.signInWithPassword({
-        email: data.email,
+        email: data.email.trim(),
         password: data.password,
       })
+      
       if (error) {
+        console.error('Sign in error:', error)
+        
         if (error instanceof AuthApiError) {
-          setFormError('Invalid email or password.')
+          // Show more specific error based on status
+          if (error.status === 400) {
+            setFormError('Invalid credentials. Please check your email and password.')
+          } else {
+            setFormError('Invalid email or password.')
+          }
         } else {
           setFormError(error.message)
         }

@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useAuth } from '@/hooks/useAuth'
+import { supabase } from '@/lib/supabase'
 import { getEdgeFunctionUrl, getAuthHeader } from '@/lib/utils'
 import type { OrganizationMember } from '@/types'
 
@@ -10,13 +10,16 @@ interface InviteMemberPayload {
 
 export function useInviteMember(orgId: string) {
   const queryClient = useQueryClient()
-  const { session } = useAuth()
 
   return useMutation<OrganizationMember, Error, InviteMemberPayload>({
     mutationFn: async (payload: InviteMemberPayload) => {
+      // Always get a fresh session/token
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session) throw new Error('You must be signed in to invite members.')
+
       const res = await fetch(getEdgeFunctionUrl('invite-member'), {
         method: 'POST',
-        headers: getAuthHeader(session?.access_token ?? ''),
+        headers: getAuthHeader(session.access_token),
         body: JSON.stringify(payload),
       })
       if (!res.ok) {
