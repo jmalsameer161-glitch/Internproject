@@ -43,11 +43,19 @@ export function DashboardPage() {
         />
       </div>
 
-      {/* Loading */}
+      {/* Loading with enhanced skeleton */}
       {isLoading && (
-        <div className="space-y-3">
+        <div className="space-y-3 animate-in fade-in-50 duration-300">
           {[1, 2, 3].map((i) => (
-            <Skeleton key={i} className="h-16 w-full rounded-lg" />
+            <div key={i} className="rounded-lg border border-border bg-card p-4 space-y-3">
+              <div className="flex items-start justify-between">
+                <div className="space-y-2 flex-1">
+                  <Skeleton className="h-5 w-48" />
+                  <Skeleton className="h-4 w-32" />
+                </div>
+                <Skeleton className="h-9 w-9 rounded-full" />
+              </div>
+            </div>
           ))}
         </div>
       )}
